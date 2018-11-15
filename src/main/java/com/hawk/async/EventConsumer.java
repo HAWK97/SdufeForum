@@ -36,9 +36,9 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        // 获得所有 EventHandler 接口的实现类
+        // 获得所有 EventHandler 接口的实现类所创建的 bean
         Map<String, EventHandler> beans = applicationContext.getBeansOfType(EventHandler.class);
-        // 遍历这些实现类，根据它们的 getSupportEventTypes() 方法为 config 成员变量赋值
+        // 遍历这些 bean，根据它们的 getSupportEventTypes() 方法为 config 成员变量赋值
         for (Map.Entry<String, EventHandler> entry : beans.entrySet()) {
             List<EventType> eventTypeList = entry.getValue().getSupportEventTypes();
             for (EventType eventType : eventTypeList) {
